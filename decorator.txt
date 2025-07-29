@@ -1,0 +1,48 @@
+import sqlite3
+conn = sqlite3.connect('my_database.db')
+cursor = conn.cursor()
+logged_in_people = []
+
+def login(email, password):
+   if email in 'my_database.db' and password in 'my_database.db':
+     logged_in_people.append(email)
+     print("you are logged in.")
+
+   else:
+    print("Access denied . Please log in .")
+
+
+
+def require_login(func):
+  def wrapper(*args,**kwargs):
+    if email in logged_in_people:
+      if email == "wasefazahoor@gmail.com" or email == "zahoor@gmail.com":
+          print("you did not access")
+      else:
+          result = func(*args,**kwargs)
+          return result
+    return wrapper
+
+@require_login
+def view_dashboard():
+   print("Welcome to dashboard")
+
+@require_login
+def edit_profile():
+   print("Edit profile screen")
+
+
+email = "2024n15330@gmail.com"
+
+password = "abc"
+
+login(email, password)
+
+view_dashboard()
+
+edit_profile()
+
+
+
+# conn.commit()
+conn.close
